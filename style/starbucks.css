@@ -115,7 +115,43 @@ box-shadow: 0px 3px 3px -3px rgba(34, 60, 80, 0.5);
 }
 .btn__item {
     font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid transparent;
 }
+
+.btn__item:hover {
+    background-color: #f8f9fa;
+    border-color: #00754A;
+    color: #00754A;
+}
+
+.btn__item.user-greeting {
+    color: #00754A;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn__item.user-greeting:hover {
+    background-color: #e8f5e8;
+    border-color: #00754A;
+}
+
+.btn__item.logout-btn {
+    background-color: #d62b1f;
+    color: white;
+    border-color: #d62b1f;
+}
+
+.btn__item.logout-btn:hover {
+    background-color: #b91d1d;
+    border-color: #b91d1d;
+    color: white;
+}
+
 .btn__item:last-of-type {
     padding: 8px 16px;
     border: 1px solid #000;
@@ -696,14 +732,44 @@ p {
 }
 
 .burger-btn {
-    padding: 12px 20px;
-    border-radius: 50px;
-    text-align: center;
     font-weight: 600;
-    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
     transition: all 0.3s ease;
-    border: 1px solid #000000;
-    color: #000000;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid transparent;
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.burger-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #00754A;
+    color: #00754A;
+}
+
+.burger-btn.user-greeting {
+    color: #00754A;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.burger-btn.user-greeting:hover {
+    background-color: #e8f5e8;
+    border-color: #00754A;
+}
+
+.burger-btn.logout-btn {
+    background-color: #d62b1f;
+    color: white;
+    border-color: #d62b1f;
+}
+
+.burger-btn.logout-btn:hover {
+    background-color: #b91d1d;
+    border-color: #b91d1d;
+    color: white;
 }
 
 .burger-btn-primary {
@@ -887,5 +953,167 @@ body.menu-open::before {
     .flex-nav > h2 {
         font-size: 16px;
         margin-bottom: 30px;
+    }
+}
+
+/* Стили для авторизации и информации о пользователе */
+.user-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.user-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.user-modal.active .user-modal-content {
+    transform: translateY(0);
+}
+
+.user-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.user-modal-header h3 {
+    color: #00754A;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.user-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.user-modal-close:hover {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+.user-info {
+    margin-bottom: 20px;
+}
+
+.user-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.user-info-item:last-child {
+    border-bottom: none;
+}
+
+.user-info-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 14px;
+}
+
+.user-info-value {
+    color: #000;
+    font-size: 14px;
+}
+
+.user-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.user-modal-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.user-modal-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #999;
+}
+
+.user-modal-btn.primary {
+    background-color: #00754A;
+    color: white;
+    border-color: #00754A;
+}
+
+.user-modal-btn.primary:hover {
+    background-color: #005a3a;
+    border-color: #005a3a;
+}
+
+.user-modal-btn.danger {
+    background-color: #d62b1f;
+    color: white;
+    border-color: #d62b1f;
+}
+
+.user-modal-btn.danger:hover {
+    background-color: #b91d1d;
+    border-color: #b91d1d;
+}
+
+/* Адаптивность для модального окна */
+@media (max-width: 768px) {
+    .user-modal-content {
+        margin: 20px;
+        padding: 20px;
+    }
+    
+    .user-modal-actions {
+        flex-direction: column;
+    }
+    
+    .user-modal-btn {
+        width: 100%;
+        text-align: center;
     }
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Starbucks</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #006241;
+        text-align: center;
+      }
+      .user-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        background: #f9f9f9;
+      }
+      .user-name {
+        font-weight: bold;
+        color: #006241;
+      }
+      .user-email {
+        color: #666;
+      }
+      .user-date {
+        font-size: 0.9em;
+        color: #999;
+      }
+      .clear-btn {
+        background: #d62b1f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px 0;
+      }
+      .clear-btn:hover {
+        background: #b91d1d;
+      }
+      .back-btn {
+        background: #006241;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px 0;
+      }
+      .back-btn:hover {
+        background: #004d33;
+      }
+      .no-users {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Admin Panel - Зарегистрированные пользователи</h1>
+
+      <button class="clear-btn" onclick="clearAllUsers()">
+        Очистить всех пользователей
+      </button>
+      <a href="index.html" class="back-btn">Вернуться на главную</a>
+
+      <div id="users-container">
+        <!-- Пользователи будут загружены здесь -->
+      </div>
+    </div>
+
+    <script>
+      function loadUsers() {
+        const users = JSON.parse(
+          localStorage.getItem("starbucksUsers") || "[]"
+        );
+        const container = document.getElementById("users-container");
+
+        if (users.length === 0) {
+          container.innerHTML =
+            '<div class="no-users">Пользователи не найдены</div>';
+          return;
+        }
+
+        container.innerHTML = users
+          .map(
+            (user) => `
+                <div class="user-card">
+                    <div class="user-name">${user.firstName} ${
+              user.lastName
+            }</div>
+                    <div class="user-email">Email: ${user.email}</div>
+                    <div class="user-date">Зарегистрирован: ${new Date(
+                      user.createdAt
+                    ).toLocaleString()}</div>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      function clearAllUsers() {
+        if (confirm("Вы уверены, что хотите удалить всех пользователей?")) {
+          localStorage.removeItem("starbucksUsers");
+          localStorage.removeItem("currentUser");
+          loadUsers();
+          alert("Все пользователи удалены");
+        }
+      }
+
+      // Загружаем пользователей при загрузке страницы
+      document.addEventListener("DOMContentLoaded", loadUsers);
+    </script>
+  </body>
+</html>

@@ -1,78 +1,125 @@
-// Адаптивное меню
+// Функция для проверки авторизации
+function checkAuthStatus() {
+  const currentUser = localStorage.getItem("currentUser");
+  if (currentUser) {
+    const user = JSON.parse(currentUser);
+    console.log("Пользователь авторизован:", user.firstName);
+    return user;
+  }
+  return null;
+}
+
+// Функция для выхода из системы
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.reload();
+}
+
+// Функция для обновления интерфейса в зависимости от статуса авторизации
+function updateAuthUI() {
+  const currentUser = checkAuthStatus();
+  const signInBtn = document.querySelector('.btn__item[href="signin.html"]');
+  const joinBtn = document.querySelector('.btn__item[href="join.html"]');
+  const burgerSignInBtn = document.querySelector('.burger-btn[href="signin.html"]');
+  const burgerJoinBtn = document.querySelector('.burger-btn[href="join.html"]');
+
+  if (currentUser) {
+    // Пользователь авторизован - показываем информацию о пользователе и кнопку выхода
+    if (signInBtn && joinBtn) {
+      signInBtn.textContent = `Привет, ${currentUser.firstName}!`;
+      signInBtn.href = "#";
+      signInBtn.onclick = function(e) {
+        e.preventDefault();
+        showUserMenu();
+      };
+      
+      joinBtn.textContent = "Выйти";
+      joinBtn.href = "#";
+      joinBtn.onclick = function(e) {
+        e.preventDefault();
+        logout();
+      };
+    }
+
+    if (burgerSignInBtn && burgerJoinBtn) {
+      burgerSignInBtn.textContent = `Привет, ${currentUser.firstName}!`;
+      burgerSignInBtn.href = "#";
+      burgerSignInBtn.onclick = function(e) {
+        e.preventDefault();
+        showUserMenu();
+      };
+      
+      burgerJoinBtn.textContent = "Выйти";
+      burgerJoinBtn.href = "#";
+      burgerJoinBtn.onclick = function(e) {
+        e.preventDefault();
+        logout();
+      };
+    }
+  } else {
+    // Пользователь не авторизован - показываем стандартные кнопки
+    if (signInBtn && joinBtn) {
+      signInBtn.textContent = "Sign in";
+      signInBtn.href = "signin.html";
+      signInBtn.onclick = null;
+      
+      joinBtn.textContent = "Join now";
+      joinBtn.href = "join.html";
+      joinBtn.onclick = null;
+    }
+
+    if (burgerSignInBtn && burgerJoinBtn) {
+      burgerSignInBtn.textContent = "Sign in";
+      burgerSignInBtn.href = "signin.html";
+      burgerSignInBtn.onclick = null;
+      
+      burgerJoinBtn.textContent = "Join now";
+      burgerJoinBtn.href = "join.html";
+      burgerJoinBtn.onclick = null;
+    }
+  }
+}
+
+// Функция для показа меню пользователя
+function showUserMenu() {
+  const currentUser = checkAuthStatus();
+  if (!currentUser) return;
+
+  // Перенаправляем на страницу профиля
+  window.location.href = "profile.html";
+}
+
+// Обработка бургер-меню
 document.addEventListener("DOMContentLoaded", function () {
-  const burgerIcon = document.querySelector(".burger-menu-icon");
+  const burgerMenuIcon = document.querySelector(".burger-menu-icon");
   const burgerMenu = document.querySelector(".burger__menu");
   const burgerClose = document.querySelector(".burger-close");
-  const body = document.body;
 
-  // Функция открытия меню
-  function openMenu() {
-    burgerMenu.classList.add("active");
-    body.classList.add("menu-open");
-    burgerIcon.classList.add("active");
+  if (burgerMenuIcon) {
+    burgerMenuIcon.addEventListener("click", function () {
+      burgerMenu.classList.add("active");
+    });
   }
 
-  // Функция закрытия меню
-  function closeMenu() {
-    burgerMenu.classList.remove("active");
-    body.classList.remove("menu-open");
-    burgerIcon.classList.remove("active");
+  if (burgerClose) {
+    burgerClose.addEventListener("click", function () {
+      burgerMenu.classList.remove("active");
+    });
   }
 
-  // Открытие меню
-  burgerIcon.addEventListener("click", openMenu);
-
-  // Закрытие меню через кнопку X
-  burgerClose.addEventListener("click", closeMenu);
-
-  // Закрытие меню при клике вне его
+  // Закрытие бургер-меню при клике вне его
   document.addEventListener("click", function (e) {
-    if (!burgerMenu.contains(e.target) && !burgerIcon.contains(e.target)) {
-      closeMenu();
+    if (!burgerMenu.contains(e.target) && !burgerMenuIcon.contains(e.target)) {
+      burgerMenu.classList.remove("active");
     }
   });
 
-  // Закрытие меню при нажатии Escape
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      closeMenu();
-    }
-  });
-
-  // Плавная прокрутка для якорных ссылок
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    });
-  });
-
-  // Анимация появления элементов при скролле
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animate-in");
-      }
-    });
-  }, observerOptions);
-
-  // Наблюдаем за блоками для анимации
-  document
-    .querySelectorAll(
-      ".green__block, .live__block, .loveit__block, .find__block, .black__block"
-    )
-    .forEach((block) => {
-      observer.observe(block);
-    });
+  // Обновляем интерфейс авторизации
+  updateAuthUI();
 });
+
+// Экспортируем функции для использования в других файлах
+window.checkAuthStatus = checkAuthStatus;
+window.logout = logout;
+window.updateAuthUI = updateAuthUI;
+window.showUserMenu = showUserMenu;

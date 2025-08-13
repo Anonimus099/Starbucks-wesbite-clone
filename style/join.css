@@ -1,0 +1,100 @@
+/* Дополнительные стили для страницы регистрации */
+
+.password-requirements {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.password-requirements p {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  color: #333;
+}
+
+.password-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-requirements li {
+  padding: 4px 0;
+  color: #666;
+  position: relative;
+  padding-left: 20px;
+}
+
+.password-requirements li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: #ccc;
+  font-weight: bold;
+}
+
+.password-requirements li.valid::before {
+  content: "✓";
+  color: #00754a;
+}
+
+.password-requirements li.invalid::before {
+  content: "✗";
+  color: #d62b1f;
+}
+
+.signin-section {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #e9ecef;
+}
+
+.signin-section h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.signin-section p {
+  color: #666;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.signin-link {
+  display: inline-block;
+  background-color: transparent;
+  color: #00754a;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 2px solid #00754a;
+  border-radius: 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.signin-link:hover {
+  background-color: #00754a;
+  color: white;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .password-requirements {
+    padding: 12px;
+    margin: 12px 0;
+  }
+  
+  .signin-section {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+  
+  .signin-section h2 {
+    font-size: 20px;
+  }
+}

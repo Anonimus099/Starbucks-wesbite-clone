@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In - Starbucks Coffee Company</title>
+    <title>Join Starbucks Rewards - Starbucks Coffee Company</title>
     <link rel="stylesheet" href="./style/starbucks.css" />
     <link rel="stylesheet" href="./style/signin.css" />
+    <link rel="stylesheet" href="./style/join.css" />
     <link rel="icon" type="image/png" href="./img/favicon/starbucks.png" />
     <script defer src="./starbucks.js"></script>
-    <script defer src="./signin.js"></script>
+    <script defer src="./join.js"></script>
     <link
       href="https://db.onlinewebfonts.com/c/d7e8a95865396cddca89b00080d2cba6?family=SoDo+Sans+SemiBold"
       rel="stylesheet"
@@ -92,7 +93,7 @@
             <div class="burger-footer">
               <div class="burger-buttons">
                 <a href="signin.html" class="burger-btn">Sign in</a>
-                <a href="#" class="burger-btn burger-btn-primary">Join now</a>
+                <a href="join.html" class="burger-btn burger-btn-primary">Join now</a>
               </div>
             </div>
           </div>
@@ -103,9 +104,25 @@
     <main class="signin-main">
       <div class="signin-container">
         <div class="signin-content">
-          <h1>Sign in or create an account</h1>
+          <h1>Create your account</h1>
 
           <div class="form-container">
+            <label>* First name</label>
+            <input
+              type="text"
+              id="firstName"
+              placeholder="First name"
+              required
+            />
+
+            <label>* Last name</label>
+            <input
+              type="text"
+              id="lastName"
+              placeholder="Last name"
+              required
+            />
+
             <label>* Email address</label>
             <input
               type="email"
@@ -125,33 +142,48 @@
               <span class="toggle-password" onclick="togglePassword()">👁</span>
             </div>
 
+            <div class="password-requirements">
+              <p>Password must contain:</p>
+              <ul>
+                <li id="length-check">At least 8 characters</li>
+                <li id="uppercase-check">One uppercase letter</li>
+                <li id="lowercase-check">One lowercase letter</li>
+                <li id="number-check">One number</li>
+                <li id="special-check">One special character</li>
+              </ul>
+            </div>
+
             <div class="checkbox">
-              <input type="checkbox" id="keep-signed-in" checked />
-              <label for="keep-signed-in"
-                >Keep me signed in. <a href="#">Details</a></label
-              >
+              <input type="checkbox" id="terms" required />
+              <label for="terms">
+                I agree to the <a href="#">Terms of Use</a> and 
+                <a href="#">Privacy Notice</a>
+              </label>
             </div>
 
-            <div class="links">
-              <a href="#">Forgot your username?</a>
-              <a href="#">Forgot your password?</a>
+            <div class="checkbox">
+              <input type="checkbox" id="marketing" />
+              <label for="marketing">
+                Yes, I'd like email from Starbucks with news, updates and access to 
+                exclusive deals. <a href="#">Learn more</a>
+              </label>
             </div>
 
-            <button class="btn">Sign in</button>
+            <button class="btn" id="join-btn">Create account</button>
           </div>
 
-          <div class="join-section">
-            <h2>JOIN STARBUCKS® REWARDS</h2>
+          <div class="signin-section">
+            <h2>Already have an account?</h2>
             <p>
-              As a member, start earning free food and drinks, unlock our best
-              offers and celebrate your birthday with a treat from us. Best of
-              all, it's free to join.
+              Sign in to access your Starbucks Rewards account and start earning 
+              points for free food and drinks.
             </p>
-            <a href="join.html" class="join-btn">Join now</a>
+            <a href="signin.html" class="signin-link">Sign in</a>
           </div>
         </div>
       </div>
     </main>
+
     <hr class="footer">
     <nav class="footer-nav">
       <div class="footer-nav-flex">
@@ -261,7 +293,6 @@
       </div>
 
       <div class="border-line"></div>
-
 
       <ul class="footer-social-menu">
         <li class="social-icon__item">
