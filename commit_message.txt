@@ -1,0 +1,10 @@
+Add authentication system with registration, login and user management
+
+- Created user registration system with field validation
+- Implemented login system with user verification  
+- Added user profile page with detailed information
+- Created admin panel for user management
+- Added logout functionality
+- Enhanced UI with user information display
+- Added comprehensive README.md documentation
+- All data stored in LocalStorage for persistence
